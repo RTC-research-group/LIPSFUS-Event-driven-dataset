@@ -1,0 +1,36 @@
+"""
+This is a custom net for spoken digits visual lips classification
+"""
+from tensorflow.keras import layers
+from globals import *
+from tensorflow import keras
+from keras import regularizers
+
+# # NET 0
+# inputs = layers.Input(shape=(VISION_AEDAT_HEIGHT, VISION_AEDAT_WIDTH, SLICES_NUMBER))
+# net = layers.Conv2D(16, kernel_size=(3, 3), strides=1, activation="relu", kernel_regularizer=regularizers.l2(0.001))(inputs)
+# net = layers.MaxPooling2D(pool_size=(2, 2))(net)
+# net = layers.Conv2D(32, kernel_size=(2, 2), strides=1, activation="relu", kernel_regularizer=regularizers.l2(0.001))(net)
+# net = layers.MaxPooling2D(pool_size=(2, 2))(net)
+# net = layers.Conv2D(64, kernel_size=(2, 2), strides=1, activation="relu", kernel_regularizer=regularizers.l2(0.001))(net)
+# net = layers.MaxPooling2D(pool_size=(2, 2))(net)
+# net = layers.Flatten()(net)
+# net = layers.Dropout(0.5)(net)
+# #net = layers.Dense(128, activation="relu", kernel_regularizer=regularizers.l2(0.001))(net)
+# net = layers.Dense(len(SAMPLE_LABELS), activation="softmax", kernel_regularizer=regularizers.l2(0.001))(net)
+# model = keras.Model(inputs, net)
+# model.summary()
+
+# NET 1
+inputs = layers.Input(shape=(VISION_AEDAT_HEIGHT, VISION_AEDAT_WIDTH, SLICES_NUMBER))
+net = layers.Conv2D(16, kernel_size=(3, 3), strides=1, activation="relu", kernel_regularizer=regularizers.l2(0.001))(inputs)
+net = layers.MaxPooling2D(pool_size=(2, 2))(net)
+net = layers.Conv2D(32, kernel_size=(2, 2), strides=1, activation="relu", kernel_regularizer=regularizers.l2(0.001))(net)
+net = layers.MaxPooling2D(pool_size=(2, 2))(net)
+net = layers.BatchNormalization()(net)
+net = layers.Flatten()(net)
+net = layers.Dropout(0.2)(net)
+net = layers.LSTM(32, return_sequences=False, dropout=0.2)(net)
+net = layers.Dense(len(SAMPLE_LABELS), activation="softmax", kernel_regularizer=regularizers.l2(0.001))(net)
+model = keras.Model(inputs, net)
+model.summary()

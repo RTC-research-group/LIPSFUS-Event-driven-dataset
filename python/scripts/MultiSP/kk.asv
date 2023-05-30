@@ -1,0 +1,8 @@
+file=transpose(csvread('alejandro2 bci -90deg_lips_73_78_word_visual_one_th_5000_prets_100000_ts_11072312_12572312_hist.csv',0,0));
+[a,b]=size(file);
+hist = zeros (256,48);
+for i=1:b
+    hist(mod(floor(file(1,i)/2),64)+1,floor(mod(file(1,i)/256,48)+1)) = hist(mod(file(1,i),64)+1,floor(mod(file(1,i)/256,48)+1)) + file(2,i);
+end
+figure;
+image(hist);

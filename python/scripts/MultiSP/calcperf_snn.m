@@ -1,0 +1,38 @@
+function [perf,E,tj1,ta,w,noFire]=calcperf_snn(net,ti,td,w,delay)
+
+
+
+if nargin<5
+    delay=cell2mat_snn(net.snmParam.delay);
+    if nargin<4
+        w=getx_snn(net);
+    end
+end
+noFire=false;
+numInputs=size(ti,2);
+dOutput=net.size(end);
+perf=NaN;
+E=NaN(dOutput,numInputs);
+tj1=NaN(dOutput,numInputs);
+ta=cell(numInputs,net.numLayers);
+c0=clock;
+for iInput=1:numInputs
+    %iInput
+    [ta(iInput,:),noFire,w]=simsnn(net,ti(:,iInput),w,delay);
+    if noFire==true
+        return
+    end
+    for iNeuron=1:dOutput
+        tj1(iNeuron,iInput)=ta{iInput,end}{iNeuron}(1);
+    end
+    c = clock;
+    elapsed_time_min = (c(4)*60+c(5)+c(6)/60) - (c0(4)*60+c0(5)+c0(6)/60);
+    c0=c;
+    if (~rem(iInput,50))
+       fprintf('Processing Input calcperf: %d/%d. Last Input processing time: %d minutes\n',iInput,numInputs,elapsed_time_min)
+    end
+
+end
+E=td-tj1;
+perf=sum(sum(E.^2))/prod(size(E));  % Mean squared error performance
+
