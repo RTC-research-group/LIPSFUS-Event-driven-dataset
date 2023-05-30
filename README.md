@@ -20,6 +20,9 @@ A MATLAB script allow us to split an aedat file in two: one for visual events an
 
 ![image](https://user-images.githubusercontent.com/15526602/149209857-08d4e714-a7d1-4d46-abac-e664464aaa67.png)
 
+## Citation
+This project is the result of a collaboration between two labs: Robotic and Tech of Computers group, SCORE lab, ETSI-EPS, Univ. of Seville (USE); Computational Neuroscience and Neuromorphic Engineering group, Ulster University.
+```
 @Article{riosnavarro2023lipsfus,
       title={LIPSFUS: A neuromorphic dataset for audio-visual sensory fusion of lip reading}, 
       author={Antonio Rios-Navarro and Enrique Piñero-Fuentes and Salvador Canas-Moreno and Aqib Javed and Jin Harkin and Alejandro Linares-Barranco},
@@ -28,7 +31,7 @@ A MATLAB script allow us to split an aedat file in two: one for visual events an
       archivePrefix={arXiv},
       primaryClass={cs.SD}
 }
-
+```
 We want to thanks the Intelligent Systems Research Center from Ulster University in Derry (Northern Ireland) for hosting us in the summer of 2021 and collaborate in this neuromorphic project.
 I want to thanks also the "Salvador de Madariaga" program for senior researchers scientific visits for the finnacial support of this visit.
 
